@@ -147,7 +147,7 @@ function updateSubmitButton(total) {
     const submitBtn = document.getElementById('submit-btn');
     if (submitBtn) {
         if (total > 0) {
-            submitBtn.textContent = `Anfrage senden (${formatPrice(total)}) 🪶`;
+            submitBtn.textContent = `Anfrage senden (${formatPrice(total)}) `;
             submitBtn.disabled = false;
             submitBtn.style.opacity = '1';
         } else {
@@ -550,7 +550,7 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 // CONSOLE MESSAGE
 // ===================================
 
-console.log('%c🪶 Drei Fächer - Mit Haltung, Humor und Herz', 
+console.log('%c Drei Fächer - Mit Haltung, Humor und Herz', 
     'font-size: 20px; color: #6B8E23; font-weight: bold;');
 console.log('%cWebsite entwickelt mit Liebe zum Detail ✨', 
     'font-size: 14px; color: #5D6D7E; font-style: italic;');
