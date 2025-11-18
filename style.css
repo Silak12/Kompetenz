@@ -1330,3 +1330,31 @@ body::before {
         page-break-after: always;
     }
 }
+/* ===================================
+   FOOTER LEGAL LINKS
+   =================================== */
+
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.footer-legal a {
+    color: var(--color-chalk);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: var(--color-sun);
+}
+
+.footer-legal .separator {
+    color: var(--color-chalk);
+    opacity: 0.5;
+}
