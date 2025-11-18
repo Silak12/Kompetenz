@@ -5,9 +5,9 @@
 // Die Preise werden automatisch überall auf der Website aktualisiert
 
 const PREISE = {
-    haltung: 15.00,      // 🌿 Haltungsfächer Preis in €
-    reflexion: 15.00,    // 🌸 Reflexionsfächer Preis in €
-    kompetenz: 15.00     // 🌻 Kompetenzfächer Preis in €
+    haltung: 10.00,      // 🌿 Haltungsfächer Preis in €
+    reflexion: 10.00,    // 🌸 Reflexionsfächer Preis in €
+    kompetenz: 10.00     // 🌻 Kompetenzfächer Preis in €
 };
 
 // ===================================
