@@ -11,8 +11,102 @@ const PREISE = {
 };
 
 // ===================================
+// FÄCHER-DATEN FÜR MODAL
+// ===================================
+
+const FAECHER_DATA = {
+    haltung: {
+        emoji: '🌿',
+        title: 'Haltungsfächer',
+        tagline: 'Stärkt dich im Vorfeld',
+        description: 'Der Haltungsfächer ist ein Reflexionsinstrument. Er unterstützt dich dabei, deine eigenen Überzeugungen bewusst zu machen, innere Klarheit zu gewinnen und eine Haltung zu entwickeln, die Beziehung, Vertrauen und Lernfreude stärkt. Durch Fragen, Impulse und Affirmationen lädt der Fächer dich ein, Haltung als lebendigen Prozess zwischen Selbstwahrnehmung und pädagogischem Handeln zu verstehen.'
+    },
+    kompetenz: {
+        emoji: '🌻',
+        title: 'Kompetenzfächer',
+        tagline: 'Führt dich im beruflichen Wachstum',
+        description: 'Der Kompetenzfächer unterstützt dich dabei, professionelle Handlungskompetenzen klar zu benennen und gezielt weiterzuentwickeln. Er schafft Transparenz über Erwartungen, eröffnet Reflexionsräume und macht deine individuelle Entwicklung sichtbar, Schritt für Schritt, Karte für Karte.'
+    },
+    reflexion: {
+        emoji: '🌸',
+        title: 'Reflexionsfächer',
+        tagline: 'Begleitet dich im Rückblick',
+        description: 'Der Reflexionsfächer öffnet den Raum zwischen Erleben und Verstehen. Er hilft dir dabei, Unterricht, Beziehung und Situationen mit ruhigem Blick zu betrachten. Jede Karte schenkt dir eine Frage, die weitet, klärt und verbindet, damit Reflexion nicht zur Bewertung wird, sondern zu einem Weg der Entwicklung und inneren Ruhe.'
+    }
+};
+
+// ===================================
 // AB HIER NICHTS MEHR ÄNDERN (außer du weißt was du tust 😉)
 // ===================================
+
+// ===================================
+// INTERAKTIVE FÄCHER-MODAL FUNKTIONALITÄT
+// ===================================
+
+function initializeFanModal() {
+    const fanPreviews = document.querySelectorAll('.fan-preview');
+    const modal = document.getElementById('fanModal');
+    const modalOverlay = modal?.querySelector('.fan-modal-overlay');
+    const modalClose = modal?.querySelector('.fan-modal-close');
+    const modalBody = modal?.querySelector('.fan-modal-body');
+    
+    if (!modal || !fanPreviews.length) return;
+    
+    // Event Listener für jede Fächer-Karte
+    fanPreviews.forEach(preview => {
+        preview.addEventListener('click', () => {
+            const fanType = preview.getAttribute('data-fan');
+            const fanData = FAECHER_DATA[fanType];
+            
+            if (fanData) {
+                showModal(fanData, fanType);
+            }
+        });
+    });
+    
+    // Modal schließen
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+    
+    modalOverlay?.addEventListener('click', closeModal);
+    modalClose?.addEventListener('click', closeModal);
+    
+    // ESC-Taste zum Schließen
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+function showModal(fanData, fanType) {
+    const modal = document.getElementById('fanModal');
+    const modalBody = modal?.querySelector('.fan-modal-body');
+    
+    if (!modal || !modalBody) return;
+    
+    // Modal-Content erstellen
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <span class="modal-emoji">${fanData.emoji}</span>
+            <h2 class="modal-title">${fanData.title}</h2>
+            <p class="modal-tagline">${fanData.tagline}</p>
+        </div>
+        <div class="modal-content-text">
+            <p>${fanData.description}</p>
+        </div>
+        <div class="modal-cta">
+            <a href="#kontakt" class="btn btn-primary">Jetzt anfragen</a>
+            <a href="#products" class="btn btn-secondary">Mehr zu allen Fächern</a>
+        </div>
+    `;
+    
+    // Modal anzeigen
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
 // ===================================
 // PREISBERECHNUNG & QUANTITY CONTROLS
@@ -76,6 +170,9 @@ function updatePriceDisplay() {
 
 // Event Listeners für Quantity Controls
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Fan Modal
+    initializeFanModal();
+    
     updatePriceDisplay();
     calculatePrices(); // Initial calculation
     
@@ -125,33 +222,35 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    
-    // Animate hamburger
-    const spans = hamburger.querySelectorAll('span');
-    if (navMenu.classList.contains('active')) {
-        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-    } else {
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-    }
-});
-
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+if (hamburger && navMenu) {
+    // Toggle mobile menu
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        
+        // Animate hamburger
         const spans = hamburger.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+        if (navMenu.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
     });
-});
+
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        });
+    });
+}
 
 // ===================================
 // SMOOTH SCROLLING
@@ -159,14 +258,26 @@ navLinks.forEach(link => {
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        
+        // Ignore empty hash links
+        if (href === '#') return;
+        
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
             const offsetTop = target.offsetTop - 80; // Account for fixed navbar
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
             });
+            
+            // Close modal if open
+            const modal = document.getElementById('fanModal');
+            if (modal && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
     });
 });
@@ -204,15 +315,17 @@ window.addEventListener('scroll', highlightNavigation);
 
 const navbar = document.querySelector('.navbar');
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(47, 69, 56, 0.98)';
-        navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.5)';
-    } else {
-        navbar.style.background = 'rgba(47, 69, 56, 0.95)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-    }
-});
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(47, 69, 56, 0.98)';
+            navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.5)';
+        } else {
+            navbar.style.background = 'rgba(47, 69, 56, 0.95)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+        }
+    });
+}
 
 // ===================================
 // SCROLL ANIMATIONS
@@ -337,23 +450,6 @@ document.querySelectorAll('.fan-card, .fan-card-large').forEach(card => {
         this.style.transform = 'translateX(0) scale(1)';
     });
 });
-
-// ===================================
-// PARALLAX EFFECT FOR HERO PORTRAIT
-// ===================================
-
-const heroPortrait = document.querySelector('.hero-portrait');
-
-if (heroPortrait) {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallax = scrolled * 0.3;
-        
-        if (scrolled < window.innerHeight) {
-            heroPortrait.style.transform = `translateY(${parallax}px)`;
-        }
-    });
-}
 
 // ===================================
 // ADD DECORATIVE ELEMENTS DYNAMICALLY

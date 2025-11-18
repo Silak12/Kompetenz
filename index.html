@@ -11,24 +11,8 @@
 </head>
 <body>
     
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">🪶 Drei Fächer</div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Start</a></li>
-                <li><a href="#haltung" class="nav-link">Haltungsfächer</a></li>
-                <li><a href="#reflexion" class="nav-link">Reflexionsfächer</a></li>
-                <li><a href="#kompetenz" class="nav-link">Kompetenzfächer</a></li>
-                <li><a href="#kontakt" class="nav-link nav-link-cta">Kontakt</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <!-- SVG Kreidelinien - über gesamte Seite -->
+    <svg class="chalk-line-svg" viewBox="0 0 100 3000" preserveAspectRatio="none">
         <path d="M 30 0 Q 25 100 35 200 Q 40 250 30 300 C 20 350 35 400 30 450 Q 28 500 32 550 C 35 600 25 650 30 700 Q 35 750 28 800 C 32 850 30 900 35 950 Q 38 1000 30 1050 C 25 1100 32 1150 30 1200 Q 35 1250 32 1300 C 30 1350 35 1400 32 1450 Q 30 1500 35 1550 C 32 1600 30 1650 35 1700 Q 30 1750 32 1800 C 35 1850 30 1900 32 1950 Q 35 2000 30 2050 C 32 2100 35 2150 30 2200 Q 32 2250 35 2300 C 30 2350 32 2400 35 2450 Q 30 2500 32 2550 C 35 2600 30 2650 32 2700 Q 35 2750 30 2800 C 32 2850 35 2900 30 2950 Q 32 3000 30 3000" 
               stroke="rgba(245, 241, 232, 0.3)" 
               stroke-width="2" 
@@ -36,7 +20,6 @@
               fill="none"
               stroke-linecap="round"/>
         
-        <!-- Kleine Kreise entlang der Linie -->
         <circle cx="30" cy="350" r="15" stroke="rgba(245, 241, 232, 0.2)" stroke-width="2" stroke-dasharray="3, 3" fill="none"/>
         <circle cx="32" cy="800" r="20" stroke="rgba(245, 241, 232, 0.2)" stroke-width="2" stroke-dasharray="3, 3" fill="none"/>
         <circle cx="30" cy="1300" r="18" stroke="rgba(245, 241, 232, 0.2)" stroke-width="2" stroke-dasharray="3, 3" fill="none"/>
@@ -45,7 +28,6 @@
     </svg>
     
     <svg class="chalk-line-svg-right" viewBox="0 0 100 3000" preserveAspectRatio="none">
-        <!-- Rechte handgezeichnete Linie -->
         <path d="M 70 0 Q 75 120 68 240 Q 65 300 72 360 C 75 420 68 480 70 540 Q 72 600 68 660 C 70 720 75 780 68 840 Q 70 900 72 960 C 68 1020 70 1080 75 1140 Q 72 1200 68 1260 C 70 1320 75 1380 70 1440 Q 68 1500 72 1560 C 75 1620 70 1680 68 1740 Q 70 1800 75 1860 C 72 1920 68 1980 70 2040 Q 75 2100 70 2160 C 68 2220 72 2280 70 2340 Q 75 2400 68 2460 C 70 2520 75 2580 72 2640 Q 68 2700 70 2760 C 75 2820 70 2880 68 2940 Q 70 3000 70 3000"
               stroke="rgba(245, 241, 232, 0.3)" 
               stroke-width="2" 
@@ -53,7 +35,6 @@
               fill="none"
               stroke-linecap="round"/>
         
-        <!-- Kleine Kreise rechts -->
         <circle cx="70" cy="400" r="17" stroke="rgba(245, 241, 232, 0.2)" stroke-width="2" stroke-dasharray="3, 3" fill="none"/>
         <circle cx="68" cy="900" r="19" stroke="rgba(245, 241, 232, 0.2)" stroke-width="2" stroke-dasharray="3, 3" fill="none"/>
         <circle cx="70" cy="1400" r="16" stroke="rgba(245, 241, 232, 0.2)" stroke-width="2" stroke-dasharray="3, 3" fill="none"/>
@@ -99,9 +80,7 @@
             <div class="nav-logo">🪶 Drei Fächer</div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Start</a></li>
-                <li><a href="#haltung" class="nav-link">Haltungsfächer</a></li>
-                <li><a href="#reflexion" class="nav-link">Reflexionsfächer</a></li>
-                <li><a href="#kompetenz" class="nav-link">Kompetenzfächer</a></li>
+                <li><a href="#products" class="nav-link">Die Fächer</a></li>
                 <li><a href="#kontakt" class="nav-link nav-link-cta">Kontakt</a></li>
             </ul>
             <div class="hamburger">
@@ -112,48 +91,68 @@
         </div>
     </nav>
 
-    <!-- Hero Section / Startseite -->
+    <!-- Hero Section / Startseite - KOMPLETT NEU -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-portrait">
-                <svg viewBox="0 0 200 200" class="portrait-sketch">
-                    <!-- Gesicht -->
-                    <circle cx="100" cy="100" r="60" fill="none" stroke="#6B8E23" stroke-width="2" stroke-dasharray="2,3"/>
-                    <!-- Augen -->
-                    <circle cx="85" cy="90" r="3" fill="#6B8E23"/>
-                    <circle cx="115" cy="90" r="3" fill="#6B8E23"/>
-                    <!-- Lächeln -->
-                    <path d="M 80 110 Q 100 120 120 110" fill="none" stroke="#6B8E23" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Haare -->
-                    <path d="M 60 70 Q 70 40 100 35 Q 130 40 140 70" fill="none" stroke="#6B8E23" stroke-width="2"/>
-                    <!-- Schiefer Rahmen -->
-                    <rect x="30" y="30" width="140" height="140" fill="none" stroke="#6B8E23" stroke-width="2" transform="rotate(-3 100 100)" stroke-dasharray="5,5"/>
-                </svg>
-                <div class="speech-bubble">
-                    <p>Einfach Karte ziehen. Denken. Schmunzeln. Wachsen.</p>
+            <div class="hero-new-layout">
+                <!-- Header Bereich -->
+                <div class="hero-header">
+                    <h1 class="hero-title-new">
+                        <span class="title-emoji">🪶</span>
+                        Drei Fächer. Viel Haltung.<br>
+                        Null Zeigefinger.
+                    </h1>
+                    <p class="hero-subtitle-new">
+                        Drei kleine Begleiter für große Momente.<br>
+                        Zum Nachdenken, Lächeln, Wachsen.
+                    </p>
+                    <p class="hero-tagline">
+                        Mit dem Ziel: dich sicherer, klarer und gelassener<br>
+                        durch deinen Berufsalltag zu begleiten.
+                    </p>
+                </div>
+
+                <!-- Interaktive Fächer-Preview -->
+                <div class="fans-interactive-container">
+                    <p class="fans-intro">Das Besondere liegt im Zusammenspiel:</p>
+                    
+                    <div class="fans-preview-grid">
+                        <!-- Haltungsfächer -->
+                        <div class="fan-preview haltung-fan" data-fan="haltung">
+                            <div class="fan-mini-icon">🌿</div>
+                            <h3 class="fan-mini-title">Haltungsfächer</h3>
+                            <p class="fan-mini-tagline">stärkt dich im Vorfeld</p>
+                            <button class="fan-expand-btn">Mehr erfahren</button>
+                        </div>
+
+                        <!-- Kompetenzfächer -->
+                        <div class="fan-preview kompetenz-fan" data-fan="kompetenz">
+                            <div class="fan-mini-icon">🌻</div>
+                            <h3 class="fan-mini-title">Kompetenzfächer</h3>
+                            <p class="fan-mini-tagline">führt dich im beruflichen Wachstum</p>
+                            <button class="fan-expand-btn">Mehr erfahren</button>
+                        </div>
+
+                        <!-- Reflexionsfächer -->
+                        <div class="fan-preview reflexion-fan" data-fan="reflexion">
+                            <div class="fan-mini-icon">🌸</div>
+                            <h3 class="fan-mini-title">Reflexionsfächer</h3>
+                            <p class="fan-mini-tagline">begleitet dich im Rückblick</p>
+                            <button class="fan-expand-btn">Mehr erfahren</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-emoji">🪶</span>
-                    Drei Fächer. Viel Haltung.<br>
-                    Null Zeigefinger.
-                </h1>
-                <p class="hero-subtitle">
-                    Drei kleine Begleiter für große Momente.<br>
-                    Zum Nachdenken, Lächeln, Wachsen.
-                </p>
-                <p class="hero-description">
-                    Für alle, die Menschen bilden –<br>
-                    und dabei selbst lebendig bleiben wollen.
-                </p>
-                <div class="hero-sketch">
-                    <span class="sketch-word">aha!</span>
-                    <span class="sketch-word">wow</span>
-                    <span class="sketch-word">weiter so</span>
+        </div>
+
+        <!-- Modal für erweiterte Fächer-Ansicht -->
+        <div class="fan-modal" id="fanModal">
+            <div class="fan-modal-overlay"></div>
+            <div class="fan-modal-content">
+                <button class="fan-modal-close">&times;</button>
+                <div class="fan-modal-body">
+                    <!-- Content wird dynamisch eingefügt -->
                 </div>
-                <a href="#products" class="btn btn-primary">Entdecke die Fächer</a>
             </div>
         </div>
     </section>
@@ -167,7 +166,7 @@
                 <div class="product-card haltung-card" data-color="olive">
                     <div class="card-emoji">🌿</div>
                     <h2>Haltungsfächer</h2>
-                    <p class="card-tagline">Lass deine Haltung tanzen.</p>
+                    <p class="card-tagline">Stärkt dich im Vorfeld.</p>
                     <div class="card-image-placeholder">
                         <div class="fan-illustration olive">
                             <div class="fan-card">Vertrauen</div>
@@ -175,12 +174,8 @@
                         </div>
                     </div>
                     <p class="card-description">
-                        Karten, die bewegen. Nach innen, nach außen, mitten ins Leben.<br>
-                        Gedanken, die kitzeln. Momente, die nachklingen.<br>
-                        Worte, die dich erden und stärken.<br>
-                        Leicht wie Papier und doch von Gewicht.
+                        Der Haltungsfächer ist ein Reflexionsinstrument. Er unterstützt dich dabei, deine eigenen Überzeugungen bewusst zu machen, innere Klarheit zu gewinnen und eine Haltung zu entwickeln, die Beziehung, Vertrauen und Lernfreude stärkt. Durch Fragen, Impulse und Affirmationen lädt der Fächer dich ein, Haltung als lebendigen Prozess zwischen Selbstwahrnehmung und pädagogischem Handeln zu verstehen.
                     </p>
-                    <a href="#haltung" class="btn btn-secondary">Mehr erfahren</a>
                     <a href="#kontakt" class="btn btn-secondary">Jetzt anfragen</a>
                 </div>
 
@@ -188,7 +183,7 @@
                 <div class="product-card reflexion-card" data-color="rose">
                     <div class="card-emoji">🌸</div>
                     <h2>Reflexionsfächer</h2>
-                    <p class="card-tagline">Dein Wegbegleiter für Innen und Außen.</p>
+                    <p class="card-tagline">Begleitet dich im Rückblick.</p>
                     <div class="card-image-placeholder">
                         <div class="fan-illustration rose">
                             <div class="fan-card">Wachsen</div>
@@ -196,10 +191,7 @@
                         </div>
                     </div>
                     <p class="card-description">
-                        Für alle, die im Referendariat wachsen wollen – im Kopf und im Herzen.<br>
-                        Zieh eine Karte. Lies. Atme.<br>
-                        Ein Impuls, der sortiert, stärkt und inspiriert.<br>
-                        Raum zum Denken. Zeit für dich.
+                        Der Reflexionsfächer öffnet den Raum zwischen Erleben und Verstehen. Er hilft dir dabei, Unterricht, Beziehung und Situationen mit ruhigem Blick zu betrachten. Jede Karte schenkt dir eine Frage, die weitet, klärt und verbindet, damit Reflexion nicht zur Bewertung wird, sondern zu einem Weg der Entwicklung und inneren Ruhe.
                     </p>
                     <a href="#kontakt" class="btn btn-secondary">Jetzt anfragen</a>
                 </div>
@@ -208,7 +200,7 @@
                 <div class="product-card kompetenz-card" data-color="sun">
                     <div class="card-emoji">🌻</div>
                     <h2>Kompetenzfächer</h2>
-                    <p class="card-tagline">Der Erfolg liegt in deinen Händen.</p>
+                    <p class="card-tagline">Führt dich im beruflichen Wachstum.</p>
                     <div class="card-image-placeholder">
                         <div class="fan-illustration sun">
                             <div class="fan-card">Entwicklung</div>
@@ -216,10 +208,7 @@
                         </div>
                     </div>
                     <p class="card-description">
-                        Jede Karte ist ein kleiner Kompass.<br>
-                        Sie lenkt den Blick auf das, was schon da ist –<br>
-                        und auf das, was noch wachsen darf.<br>
-                        So entsteht Entwicklung: bewusst, leicht, echt.
+                        Der Kompetenzfächer unterstützt dich dabei, professionelle Handlungskompetenzen klar zu benennen und gezielt weiterzuentwickeln. Er schafft Transparenz über Erwartungen, eröffnet Reflexionsräume und macht deine individuelle Entwicklung sichtbar, Schritt für Schritt, Karte für Karte.
                     </p>
                     <a href="#kontakt" class="btn btn-secondary">Jetzt anfragen</a>
                 </div>
@@ -241,12 +230,12 @@
                 
                 <form class="contact-form">
                     <div class="form-group">
-                        <label for="name">Name *</label>
+                        <label for="name">Dein Name *</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">E-Mail *</label>
+                        <label for="email">Deine E-Mail *</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     
@@ -343,9 +332,7 @@
             <p class="footer-quote">"Wer Haltung hat, braucht keine Lautstärke."</p>
             <div class="footer-links">
                 <a href="#home">Start</a>
-                <a href="#haltung">Haltungsfächer</a>
-                <a href="#reflexion">Reflexionsfächer</a>
-                <a href="#kompetenz">Kompetenzfächer</a>
+                <a href="#products">Die Fächer</a>
                 <a href="#kontakt">Kontakt</a>
             </div>
             <div class="footer-legal">
