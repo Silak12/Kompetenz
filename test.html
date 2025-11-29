@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget-Plan: Investitionsübersicht</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8fafc;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 1.8rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid #3b82f6;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 1.5rem 2rem;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .summary-card {
+            background: #ffffff;
+            padding: 1.2rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .summary-card-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+        
+        .summary-card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead {
+            background: #1e293b;
+            color: white;
+        }
+        
+        th {
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        th:last-child {
+            text-align: right;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        td {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+        
+        .category-cell {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .description-cell {
+            color: #475569;
+            font-size: 0.9rem;
+            max-width: 400px;
+        }
+        
+        .amount-cell {
+            text-align: center;
+            color: #334155;
+        }
+        
+        .price-cell {
+            text-align: right;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1rem;
+        }
+        
+        .total-row {
+            background: #f8fafc;
+            border-top: 3px solid #3b82f6;
+            font-weight: 700;
+        }
+        
+        .total-row td {
+            padding: 0.9rem 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .total-row .price-cell {
+            color: #1e293b;
+            font-size: 1.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0;
+            border-radius: 0;
+            font-size: 0.95rem;
+            font-weight: 400;
+            background: transparent;
+            color: #334155;
+        }
+        
+        .category-icon {
+            display: none;
+        }
+        
+        .tech { background: #3b82f6; }
+        .equipment { background: #10b981; }
+        .infrastructure { background: #f59e0b; }
+        .operational { background: #ec4899; }
+        .marketing { background: #8b5cf6; }
+        
+        @media (max-width: 768px) {
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .table-wrapper {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 0.6rem 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Budget-Plan: Investitionsübersicht</h1>
+            <p class="subtitle">Detaillierte Kostenaufstellung für den Projektstart</p>
+        </div>
+        
+        <div class="content">
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-card-label">Gesamtinvestition</div>
+                    <div class="summary-card-value">30.000€</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-card-label">Anzahl Positionen</div>
+                    <div class="summary-card-value">14</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-card-label">Größte Position</div>
+                    <div class="summary-card-value">5.000€</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-card-label">Durchschnitt</div>
+                    <div class="summary-card-value">2.143€</div>
+                </div>
+            </div>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kategorie</th>
+                            <th>Beschreibung</th>
+                            <th style="text-align: center;">Anzahl / Pauschale</th>
+                            <th style="text-align: center;">Einzelpreis</th>
+                            <th>Gesamt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon tech"></span>
+                                Hochleistungs-PCs
+                            </td>
+                            <td class="description-cell">Gamemaster-PC + Arbeits-PC</td>
+                            <td class="amount-cell">2</td>
+                            <td class="amount-cell">2.500€</td>
+                            <td class="price-cell">5.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon tech"></span>
+                                Kamerasystem
+                            </td>
+                            <td class="description-cell">8 Kameras für Spielerüberwachung</td>
+                            <td class="amount-cell">10</td>
+                            <td class="amount-cell">250€</td>
+                            <td class="price-cell">2.500€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon equipment"></span>
+                                Audio/Video-Zubehör
+                            </td>
+                            <td class="description-cell">Mikrofone, USB-/LAN-Kabel, Verlängerungen, Verteiler</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">3.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon equipment"></span>
+                                Beleuchtung
+                            </td>
+                            <td class="description-cell">Softboxen, Lichtausstattung</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">600€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon infrastructure"></span>
+                                Datenspeicher / NAS
+                            </td>
+                            <td class="description-cell">RAID-fähiger Speicher (mehrere TB)</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">1.400€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon infrastructure"></span>
+                                Server-/Cloud-Kosten
+                            </td>
+                            <td class="description-cell">12 Monate Cloudspeicher / Backup für Video- und Modellmaterial / Server</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">1.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon infrastructure"></span>
+                                Software & Lizenzen
+                            </td>
+                            <td class="description-cell">Entwicklungssoftware, API-Zugänge, KI-Frameworks, ChatGPT/Claude Abos (2 × 240 €/Jahr)</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">1.200€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon equipment"></span>
+                                Raumgestaltung "Wohnzimmer"
+                            </td>
+                            <td class="description-cell">Gebrauchte Möbel, Teppich, Lampen, Deko für 3–10 Personen, Bildschirme, PCs</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">5.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon equipment"></span>
+                                Gamemaster-Ausstattung
+                            </td>
+                            <td class="description-cell">Monitor + Tastatur, Lautsprecher, Headset, Möbel</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">2.500€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon operational"></span>
+                                Prototypen-/Testmaterial
+                            </td>
+                            <td class="description-cell">Requisiten, Kleinmaterialien</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">1.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon operational"></span>
+                                Testlauf-Budget
+                            </td>
+                            <td class="description-cell">Snacks, kleine Aufwandsentschädigungen für Testpersonen</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">800€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon tech"></span>
+                                Mobile Geräte
+                            </td>
+                            <td class="description-cell">Tablets/Notebooks/Smartwatches</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">3.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon marketing"></span>
+                                Marketing Budget
+                            </td>
+                            <td class="description-cell">Social Media Marketing + Suchmaschinen Marketing</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">2.000€</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">
+                                <span class="category-icon operational"></span>
+                                Externe Expertise
+                            </td>
+                            <td class="description-cell">Expertise für Umsetzung der Triangulation</td>
+                            <td class="amount-cell"><span class="badge">pauschal</span></td>
+                            <td class="amount-cell">—</td>
+                            <td class="price-cell">1.000€</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4" style="text-align: right; font-weight: 700; font-size: 1.2rem;">
+                                GESAMTSUMME
+                            </td>
+                            <td class="price-cell">30.000€</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding: 1.2rem; background: #f8fafc; border-radius: 0.5rem; border: 1px solid #e2e8f0;">
+                <h3 style="color: #1e293b; margin-bottom: 0.8rem; font-size: 1.2rem;">📊 Kategorieübersicht</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span class="category-icon tech"></span>
+                            <strong style="color: #1e293b;">Technologie</strong>
+                        </div>
+                        <div style="color: #64748b; font-size: 0.9rem;">PCs, Kameras, Mobile Geräte</div>
+                        <div style="color: #1e293b; font-weight: 600; font-size: 1.1rem; margin-top: 0.25rem;">10.500€</div>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span class="category-icon equipment"></span>
+                            <strong style="color: #1e293b;">Ausstattung</strong>
+                        </div>
+                        <div style="color: #64748b; font-size: 0.9rem;">Audio/Video, Beleuchtung, Raum</div>
+                        <div style="color: #1e293b; font-weight: 600; font-size: 1.1rem; margin-top: 0.25rem;">11.100€</div>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span class="category-icon infrastructure"></span>
+                            <strong style="color: #1e293b;">Infrastruktur</strong>
+                        </div>
+                        <div style="color: #64748b; font-size: 0.9rem;">Server, Cloud, Software</div>
+                        <div style="color: #1e293b; font-weight: 600; font-size: 1.1rem; margin-top: 0.25rem;">3.600€</div>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span class="category-icon operational"></span>
+                            <strong style="color: #1e293b;">Operatives</strong>
+                        </div>
+                        <div style="color: #64748b; font-size: 0.9rem;">Tests, Material, Expertise</div>
+                        <div style="color: #1e293b; font-weight: 600; font-size: 1.1rem; margin-top: 0.25rem;">2.800€</div>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span class="category-icon marketing"></span>
+                            <strong style="color: #1e293b;">Marketing</strong>
+                        </div>
+                        <div style="color: #64748b; font-size: 0.9rem;">Social Media, SEA/SEO</div>
+                        <div style="color: #1e293b; font-weight: 600; font-size: 1.1rem; margin-top: 0.25rem;">2.000€</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
