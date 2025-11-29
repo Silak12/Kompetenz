@@ -15,25 +15,7 @@ const faecherData = {
             <p style="font-style: italic; margin-top: 1.5rem;">Ein Gedanke hier, ein Schmunzeln da. Und plötzlich merkst du: Du bist schon mittendrin.</p>
             <p style="font-family: 'Caveat', cursive; font-size: 1.4rem; margin-top: 1.5rem; color: var(--chalkboard-green);">"Haltung wird nicht gelehrt, sondern zum Schwingen gebracht."</p>
         `,
-        images: generateImagePaths('Haltung', 10) // Generiert Haltung_1.jpg bis Haltung_10.jpg
-    },
-    reflexion: {
-        emoji: '',
-        title: 'Reflexionsfächer',
-        tagline: 'Dein Wegbegleiter im Referendariat.',
-        description: `
-            <p>Das Referendariat ist eine intensive Zeit voller neuer Erfahrungen, Herausforderungen und persönlichem Wachstum.</p>
-            <p>Es verlangt nicht nur fachliches Können, sondern auch Reflexion, Selbstbewusstsein und innere Stärke.</p>
-            <p>Genau hier setzt der <strong>REFLEXIONSFÄCHER</strong> an. Er ist mehr als ein Kartenset. Er ist dein Wegweiser, der dich durch diese Phase begleitet.</p>
-            <p><strong>Jede Karte bietet dir:</strong></p>
-            <ul style="margin-left: 1.5rem; line-height: 2;">
-                <li><strong>FRAGEN</strong>, die dich dabei unterstützen, deine Gedanken zu ordnen.</li>
-                <li><strong>WEGWEISER</strong>, die dir Orientierung geben, wenn du unsicher bist.</li>
-                <li><strong>IMPULSE</strong>, die dich inspirieren und neue Perspektiven aufzeigen.</li>
-            </ul>
-            <p style="font-style: italic; margin-top: 1.5rem;">Nutze den REFLEXIONSFÄCHER als tägliche Erinnerung daran, dass du nicht perfekt sein musst, sondern wachsen darfst!</p>
-        `,
-        images: generateImagePaths('Reflexion', 10)
+        images: generateImagePaths('Haltung', 6)
     },
     kompetenz: {
         emoji: '',
@@ -51,7 +33,25 @@ const faecherData = {
             </ul>
             <p style="font-style: italic; margin-top: 1.5rem;">Nicht perfekt sein – wachsen dürfen.</p>
         `,
-        images: generateImagePaths('Kompetenz', 10)
+        images: generateImagePaths('Kompetenz', 6)
+    },
+    reflexion: {
+        emoji: '',
+        title: 'Reflexionsfächer',
+        tagline: 'Dein Wegbegleiter im Referendariat.',
+        description: `
+            <p>Das Referendariat ist eine intensive Zeit voller neuer Erfahrungen, Herausforderungen und persönlichem Wachstum.</p>
+            <p>Es verlangt nicht nur fachliches Können, sondern auch Reflexion, Selbstbewusstsein und innere Stärke.</p>
+            <p>Genau hier setzt der <strong>REFLEXIONSFÄCHER</strong> an. Er ist mehr als ein Kartenset. Er ist dein Wegweiser, der dich durch diese Phase begleitet.</p>
+            <p><strong>Jede Karte bietet dir:</strong></p>
+            <ul style="margin-left: 1.5rem; line-height: 2;">
+                <li><strong>FRAGEN</strong>, die dich dabei unterstützen, deine Gedanken zu ordnen.</li>
+                <li><strong>WEGWEISER</strong>, die dir Orientierung geben, wenn du unsicher bist.</li>
+                <li><strong>IMPULSE</strong>, die dich inspirieren und neue Perspektiven aufzeigen.</li>
+            </ul>
+            <p style="font-style: italic; margin-top: 1.5rem;">Nutze den REFLEXIONSFÄCHER als tägliche Erinnerung daran, dass du nicht perfekt sein musst, sondern wachsen darfst!</p>
+        `,
+        images: generateImagePaths('Reflexion', 6)
     }
 };
 
@@ -63,6 +63,106 @@ function generateImagePaths(prefix, count) {
     }
     return paths;
 }
+
+// ===========================
+// PREISE & MENGENAUSWAHL
+// ===========================
+
+const PREISE = {
+    haltung: 10.00,
+    kompetenz: 10.00,
+    reflexion: 10.00
+};
+
+function formatPrice(price) {
+    return price.toFixed(2).replace('.', ',') + ' €';
+}
+
+function calculatePrices() {
+    let subtotal = 0;
+    
+    // Berechne Preis für jeden Fächer
+    Object.keys(PREISE).forEach(type => {
+        const qtyInput = document.getElementById(`qty-${type}`);
+        const itemTotal = document.querySelector(`[data-item="${type}"]`);
+        
+        if (qtyInput && itemTotal) {
+            const quantity = parseInt(qtyInput.value) || 0;
+            const total = quantity * PREISE[type];
+            itemTotal.textContent = formatPrice(total);
+            subtotal += total;
+        }
+    });
+    
+    // Aktualisiere Gesamtsumme
+    const subtotalElement = document.querySelector('.subtotal');
+    const totalElement = document.querySelector('.total-price strong');
+    const totalHiddenInput = document.getElementById('total-price-hidden');
+    
+    if (subtotalElement) subtotalElement.textContent = formatPrice(subtotal);
+    if (totalElement) totalElement.textContent = formatPrice(subtotal);
+    if (totalHiddenInput) totalHiddenInput.value = formatPrice(subtotal);
+    
+    // Button-Text aktualisieren
+    updateSubmitButton(subtotal);
+}
+
+function updateSubmitButton(total) {
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+        if (total > 0) {
+            submitBtn.textContent = `Anfrage senden (${formatPrice(total)}) 🪶`;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+        } else {
+            submitBtn.textContent = 'Bitte wähle mindestens einen Fächer';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+        }
+    }
+}
+
+// Event Listeners für Quantity Controls
+document.addEventListener('DOMContentLoaded', () => {
+    calculatePrices(); // Initial calculation
+    
+    // Plus/Minus Buttons
+    document.querySelectorAll('.qty-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = button.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            
+            if (!input) return;
+            
+            let value = parseInt(input.value) || 0;
+            const max = parseInt(input.getAttribute('max')) || 99;
+            const min = parseInt(input.getAttribute('min')) || 0;
+            
+            if (button.classList.contains('plus')) {
+                value = Math.min(value + 1, max);
+            } else if (button.classList.contains('minus')) {
+                value = Math.max(value - 1, min);
+            }
+            
+            input.value = value;
+            calculatePrices();
+        });
+    });
+    
+    // Input-Felder direkt bearbeiten
+    document.querySelectorAll('.qty-input').forEach(input => {
+        input.addEventListener('input', () => {
+            let value = parseInt(input.value) || 0;
+            const max = parseInt(input.getAttribute('max')) || 99;
+            const min = parseInt(input.getAttribute('min')) || 0;
+            
+            value = Math.max(min, Math.min(value, max));
+            input.value = value;
+            calculatePrices();
+        });
+    });
+});
 
 // ===========================
 // NAVIGATION
@@ -129,7 +229,6 @@ function openModal(faecherType) {
     const scrollHint = modal.querySelector('.scroll-hint');
     
     if (modalInfo && scrollHint && window.innerWidth <= 768) {
-        // Scroll-Hinweis ausblenden beim Scrollen
         const hideScrollHint = () => {
             if (modalInfo.scrollTop > 20) {
                 scrollHint.style.opacity = '0';
@@ -153,7 +252,6 @@ function closeModal() {
 modalClose?.addEventListener('click', closeModal);
 modalOverlay?.addEventListener('click', closeModal);
 
-// ESC Taste zum Schließen
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
         closeModal();
@@ -170,7 +268,6 @@ function buildGallery(images) {
     
     if (!galleryTrack || !galleryDots) return;
     
-    // Galerie leeren
     galleryTrack.innerHTML = '';
     galleryDots.innerHTML = '';
     
@@ -179,14 +276,12 @@ function buildGallery(images) {
         return;
     }
     
-    // Slides erstellen
     images.forEach((imagePath, index) => {
         const slide = document.createElement('div');
         slide.className = 'gallery-slide';
         slide.innerHTML = `<img src="${imagePath}" alt="Fächer Karte ${index + 1}">`;
         galleryTrack.appendChild(slide);
         
-        // Dots erstellen
         const dot = document.createElement('div');
         dot.className = `gallery-dot ${index === 0 ? 'active' : ''}`;
         dot.addEventListener('click', () => goToSlide(index));
@@ -202,10 +297,8 @@ function updateGallery() {
     
     if (!galleryTrack) return;
     
-    // Slide Position aktualisieren
     galleryTrack.style.transform = `translateX(-${currentGalleryIndex * 100}%)`;
     
-    // Dots aktualisieren
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentGalleryIndex);
     });
@@ -230,11 +323,9 @@ function goToSlide(index) {
     updateGallery();
 }
 
-// Navigation Buttons
 modal?.querySelector('.gallery-nav.next')?.addEventListener('click', nextSlide);
 modal?.querySelector('.gallery-nav.prev')?.addEventListener('click', prevSlide);
 
-// Keyboard Navigation
 document.addEventListener('keydown', (e) => {
     if (!modal.classList.contains('active')) return;
     
@@ -242,7 +333,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') prevSlide();
 });
 
-// Touch/Swipe Support für Mobile
+// Touch/Swipe Support
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -263,10 +354,8 @@ function handleSwipe() {
     
     if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
-            // Swipe left - next slide
             nextSlide();
         } else {
-            // Swipe right - prev slide
             prevSlide();
         }
     }
@@ -282,65 +371,126 @@ modal?.querySelector('.btn-order')?.addEventListener('click', () => {
 });
 
 // ===========================
-// FORMULAR HANDLING
+// FORMULAR HANDLING MIT WEB3FORMS
 // ===========================
 
-const contactForm = document.querySelector('.contact-form');
+const contactForm = document.getElementById('contact-form');
 
-contactForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Formular Daten sammeln
-    const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-    const selectedFaecher = formData.getAll('faecher');
-    
-    // Validierung
-    if (!name || !email) {
-        alert('Bitte fülle alle Pflichtfelder aus.');
-        return;
-    }
-    
-    if (selectedFaecher.length === 0) {
-        alert('Bitte wähle mindestens einen Fächer aus.');
-        return;
-    }
-    
-    // E-Mail erstellen (mailto Link)
-    const subject = encodeURIComponent('Anfrage zu den Drei Fächern');
-    
-    let body = `Hallo,%0D%0A%0D%0A`;
-    body += `ich interessiere mich für folgende Fächer:%0D%0A%0D%0A`;
-    
-    selectedFaecher.forEach(faecher => {
-        const faecherName = faecher === 'haltung' ? 'Haltungsfächer' : 
-                           faecher === 'reflexion' ? 'Reflexionsfächer' : 
-                           'Kompetenzfächer';
-        body += `- ${faecherName} (10,00 €)%0D%0A`;
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submit-btn');
+        const originalBtnText = submitBtn.textContent;
+        
+        // Validierung: Mindestens ein Fächer muss ausgewählt sein
+        const qtyHaltung = parseInt(document.getElementById('qty-haltung').value) || 0;
+        const qtyKompetenz = parseInt(document.getElementById('qty-kompetenz').value) || 0;
+        const qtyReflexion = parseInt(document.getElementById('qty-reflexion').value) || 0;
+        const totalQty = qtyHaltung + qtyKompetenz + qtyReflexion;
+        
+        if (totalQty === 0) {
+            showMessage('Bitte wähle mindestens einen Fächer aus.', 'error');
+            return;
+        }
+        
+        // Button deaktivieren während des Sendens
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet... ⏳';
+        submitBtn.style.opacity = '0.7';
+        
+        try {
+            const formData = new FormData(contactForm);
+            
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Erfolgs-Nachricht mit Bestellübersicht
+                let orderSummary = '<ul style="list-style: none; padding: 0; margin: 1rem 0;">';
+                if (qtyHaltung > 0) orderSummary += `<li>🌿 ${qtyHaltung}x Haltungsfächer</li>`;
+                if (qtyKompetenz > 0) orderSummary += `<li>🌻 ${qtyKompetenz}x Kompetenzfächer</li>`;
+                if (qtyReflexion > 0) orderSummary += `<li>🌸 ${qtyReflexion}x Reflexionsfächer</li>`;
+                orderSummary += '</ul>';
+                
+                const totalPrice = document.querySelector('.total-price strong').textContent;
+                
+                showMessage(
+                    `🎉 Vielen Dank für deine Anfrage!<br><br>${orderSummary}<p style="font-weight: bold; margin: 1rem 0;">Gesamt: ${totalPrice}</p><p>Ich melde mich in Kürze per E-Mail bei dir mit allen Details zur Bezahlung und zum Versand.</p><small>Bitte prüfe auch deinen Spam-Ordner.</small>`,
+                    'success'
+                );
+                
+                contactForm.reset();
+                calculatePrices();
+            } else {
+                throw new Error('Fehler beim Senden');
+            }
+            
+        } catch (error) {
+            showMessage(
+                '⚠️ Es gab ein Problem beim Versenden deiner Anfrage.<br>Bitte versuche es noch einmal oder kontaktiere mich direkt per E-Mail.',
+                'error'
+            );
+            console.error('Formular-Fehler:', error);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+            submitBtn.style.opacity = '1';
+        }
     });
+}
+
+// Hilfsfunktion für Nachrichten
+function showMessage(message, type) {
+    const oldMessages = document.querySelectorAll('.form-message');
+    oldMessages.forEach(msg => msg.remove());
     
-    body += `%0D%0A`;
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message ${type}-message`;
+    messageDiv.innerHTML = message;
     
-    if (message) {
-        body += `Nachricht:%0D%0A${encodeURIComponent(message)}%0D%0A%0D%0A`;
+    const styles = type === 'success' 
+        ? 'background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white;'
+        : 'background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%); color: white;';
+    
+    messageDiv.style.cssText = `
+        ${styles}
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 1.5rem;
+        animation: slideInUp 0.5s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        line-height: 1.6;
+    `;
+    
+    contactForm.appendChild(messageDiv);
+    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    setTimeout(() => {
+        messageDiv.style.animation = 'fadeOut 0.5s ease';
+        setTimeout(() => messageDiv.remove(), 500);
+    }, type === 'success' ? 10000 : 8000);
+}
+
+// CSS-Animationen
+const animationStyle = document.createElement('style');
+animationStyle.textContent = `
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
     }
-    
-    body += `Meine Kontaktdaten:%0D%0A`;
-    body += `Name: ${encodeURIComponent(name)}%0D%0A`;
-    body += `E-Mail: ${encodeURIComponent(email)}%0D%0A%0D%0A`;
-    body += `Viele Grüße`;
-    
-    // Mailto Link öffnen
-    window.location.href = `mailto:kompetenzfaecher@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Erfolgs-Nachricht
-    alert('Vielen Dank für deine Anfrage! Dein E-Mail-Programm sollte sich nun öffnen. Falls nicht, sende bitte eine E-Mail an: kompetenzfaecher@gmail.com');
-    
-    // Formular zurücksetzen
-    contactForm.reset();
-});
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-20px); }
+    }
+`;
+document.head.appendChild(animationStyle);
 
 // ===========================
 // SMOOTH SCROLLING
@@ -381,7 +531,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Elemente für Animation vorbereiten
 document.querySelectorAll('.faecher-card, .about-text, .sketch-cards').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -390,11 +539,10 @@ document.querySelectorAll('.faecher-card, .about-text, .sketch-cards').forEach(e
 });
 
 // ===========================
-// INITIAL LOAD
+// NAVIGATION ACTIVE STATE
 // ===========================
 
 window.addEventListener('load', () => {
-    // Navigation active state
     const sections = document.querySelectorAll('section[id]');
     
     window.addEventListener('scroll', () => {

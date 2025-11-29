@@ -77,29 +77,6 @@
                     </div>
                 </div>
 
-                <!-- Reflexionsfächer -->
-                <div class="faecher-card reflexion" data-faecher="reflexion">
-                    <div class="faecher-bg" style="background-image: url('assets/reflexion_hero.jpg');"></div>
-                    <div class="faecher-preview">
-                        <div class="fan-shape">
-                            <div class="fan-card card-1">R</div>
-                            <div class="fan-card card-2">E</div>
-                            <div class="fan-card card-3">F</div>
-                            <div class="fan-card card-4">L</div>
-                            <div class="fan-card card-5">E</div>
-                            <div class="fan-card card-6">X</div>
-                            <div class="fan-card card-7">I</div>
-                            <div class="fan-card card-8">O</div>
-                            <div class="fan-card card-9">N</div>
-                        </div>
-                    </div>
-                    <div class="faecher-info">
-                        <div class="faecher-emoji"></div>
-                        <h2>Reflexionsfächer</h2>
-                        <p class="faecher-tagline">Dein Wegbegleiter im Referendariat.</p>
-                        <button class="btn-explore">Entdecken</button>
-                    </div>
-                </div>
 
                 <!-- Kompetenzfächer -->
                 <div class="faecher-card kompetenz" data-faecher="kompetenz">
@@ -125,6 +102,30 @@
                     </div>
                 </div>
                 
+                <!-- Reflexionsfächer -->
+                <div class="faecher-card reflexion" data-faecher="reflexion">
+                    <div class="faecher-bg" style="background-image: url('assets/reflexion_hero.jpg');"></div>
+                    <div class="faecher-preview">
+                        <div class="fan-shape">
+                            <div class="fan-card card-1">R</div>
+                            <div class="fan-card card-2">E</div>
+                            <div class="fan-card card-3">F</div>
+                            <div class="fan-card card-4">L</div>
+                            <div class="fan-card card-5">E</div>
+                            <div class="fan-card card-6">X</div>
+                            <div class="fan-card card-7">I</div>
+                            <div class="fan-card card-8">O</div>
+                            <div class="fan-card card-9">N</div>
+                        </div>
+                    </div>
+                    <div class="faecher-info">
+                        <div class="faecher-emoji"></div>
+                        <h2>Reflexionsfächer</h2>
+                        <p class="faecher-tagline">Dein Wegbegleiter im Referendariat.</p>
+                        <button class="btn-explore">Entdecken</button>
+                    </div>
+                </div>
+
             </div>
         </div>
         
@@ -199,16 +200,34 @@
         </div>
     </section>
 
+
     <!-- Kontakt -->
     <section id="kontakt" class="contact-section">
         <div class="container">
             <div class="contact-content">
-                <h2>✉️ Interesse geweckt?</h2>
+                <h2>✉️ Unverbindliche Anfrage stellen</h2>
                 <p class="contact-intro">
-                    Stelle eine unverbindliche Anfrage – ich melde mich dann per E-Mail bei dir.
+                    Neugierig geworden?<br>
+                    Stelle eine Anfrage – ich melde mich dann per E-Mail bei dir für die Details.
                 </p>
                 
-                <form class="contact-form">
+                <div class="form-notice">
+                    <p>💡 <strong>Hinweis:</strong> Dies ist eine unverbindliche Anfrage. Der eigentliche Kauf und die Bezahlung erfolgen per E-Mail nach meiner Rückmeldung.</p>
+                </div>
+                
+                <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="adfee439-88c9-4fe2-a262-126cbeff53ee">
+                    
+                    <!-- Spam-Schutz -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    
+                    <!-- E-Mail-Einstellungen -->
+                    <input type="hidden" name="subject" value="Neue Anfrage von Drei Fächer Website">
+                    <input type="hidden" name="from_name" value="Drei Fächer Kontaktformular">
+                    <input type="hidden" name="redirect" value="false">
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name *</label>
@@ -223,43 +242,88 @@
                     
                     <div class="faecher-selection">
                         <h3>Welche Fächer interessieren dich?</h3>
+                        <p class="selection-hint">Wähle die Anzahl für jeden Fächer (0 = nicht bestellen)</p>
                         
-                        <div class="selection-grid">
-                            <label class="selection-item haltung-select">
-                                <input type="checkbox" name="faecher" value="haltung">
-                                <span class="checkbox-custom"></span>
-                                <span class="item-emoji"></span>
-                                <span class="item-name">Haltungsfächer</span>
-                                <span class="item-price">10,00 €</span>
-                            </label>
+                        <div class="faecher-grid">
+                            <!-- Haltungsfächer -->
+                            <div class="faecher-item haltung-item">
+                                <div class="faecher-header">
+                                    <span class="item-emoji"></span>
+                                    <div>
+                                        <h4>Haltungsfächer</h4>
+                                        <p class="item-price">10,00 € / Stück</p>
+                                    </div>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="qty-btn minus" data-target="qty-haltung">−</button>
+                                    <input type="number" id="qty-haltung" name="Haltungsfächer_Anzahl" min="0" max="99" value="0" class="qty-input" readonly>
+                                    <button type="button" class="qty-btn plus" data-target="qty-haltung">+</button>
+                                </div>
+                                <p class="item-total" data-item="haltung">0,00 €</p>
+                            </div>
                             
-                            <label class="selection-item reflexion-select">
-                                <input type="checkbox" name="faecher" value="reflexion">
-                                <span class="checkbox-custom"></span>
-                                <span class="item-emoji"></span>
-                                <span class="item-name">Reflexionsfächer</span>
-                                <span class="item-price">10,00 €</span>
-                            </label>
+                            <!-- Kompetenzfächer -->
+                            <div class="faecher-item kompetenz-item">
+                                <div class="faecher-header">
+                                    <span class="item-emoji"></span>
+                                    <div>
+                                        <h4>Kompetenzfächer</h4>
+                                        <p class="item-price">10,00 € / Stück</p>
+                                    </div>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="qty-btn minus" data-target="qty-kompetenz">−</button>
+                                    <input type="number" id="qty-kompetenz" name="Kompetenzfächer_Anzahl" min="0" max="99" value="0" class="qty-input" readonly>
+                                    <button type="button" class="qty-btn plus" data-target="qty-kompetenz">+</button>
+                                </div>
+                                <p class="item-total" data-item="kompetenz">0,00 €</p>
+                            </div>
                             
-                            <label class="selection-item kompetenz-select">
-                                <input type="checkbox" name="faecher" value="kompetenz">
-                                <span class="checkbox-custom"></span>
-                                <span class="item-emoji"></span>
-                                <span class="item-name">Kompetenzfächer</span>
-                                <span class="item-price">10,00 €</span>
-                            </label>
+                            <!-- Reflexionsfächer -->
+                            <div class="faecher-item reflexion-item">
+                                <div class="faecher-header">
+                                    <span class="item-emoji"></span>
+                                    <div>
+                                        <h4>Reflexionsfächer</h4>
+                                        <p class="item-price">10,00 € / Stück</p>
+                                    </div>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="qty-btn minus" data-target="qty-reflexion">−</button>
+                                    <input type="number" id="qty-reflexion" name="Reflexionsfächer_Anzahl" min="0" max="99" value="0" class="qty-input" readonly>
+                                    <button type="button" class="qty-btn plus" data-target="qty-reflexion">+</button>
+                                </div>
+                                <p class="item-total" data-item="reflexion">0,00 €</p>
+                            </div>
+                        </div>
+                        
+                        <div class="price-summary">
+                            <div class="summary-row">
+                                <span>Zwischensumme:</span>
+                                <span class="subtotal">0,00 €</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <span><strong>Gesamt:</strong></span>
+                                <span class="total-price"><strong>0,00 €</strong></span>
+                            </div>
+                            <p class="price-note">*Unverbindliche Preisangabe. Versandkosten werden per E-Mail besprochen.</p>
                         </div>
                     </div>
+                    
+                    <!-- Verstecktes Feld für Gesamtpreis -->
+                    <input type="hidden" id="total-price-hidden" name="Gesamtpreis" value="0,00 €">
                     
                     <div class="form-group">
                         <label for="message">Deine Nachricht (optional)</label>
                         <textarea id="message" name="message" rows="4" placeholder="Hast du noch Fragen oder besondere Wünsche?"></textarea>
                     </div>
                     
-                    <button type="submit" class="btn-primary btn-submit">Unverbindliche Anfrage senden 🪶</button>
-                    <p class="form-note">Nach dem Absenden erhältst du eine Bestätigung per E-Mail.</p>
+                    <button type="submit" class="btn-primary btn-submit" id="submit-btn">Unverbindliche Anfrage senden</button>
+                    <p class="form-note">Nach dem Absenden erhältst du eine Bestätigung per E-Mail mit allen Details.</p>
                 </form>
             </div>
+        </div>
+    </section>
         </div>
     </section>
 

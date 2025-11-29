@@ -1313,3 +1313,196 @@ body {
         font-size: 1.1rem;
     }
 }
+/* ===================================
+   CSS FÜR MENGENAUSWAHL - EINFACH & SCHÖN
+   =================================== */
+
+/* Hinweis-Box */
+.form-notice {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.form-notice p {
+    margin: 0;
+    color: #856404;
+    line-height: 1.6;
+}
+
+/* Selection Hint */
+.selection-hint {
+    text-align: center;
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Fächer Grid */
+.faecher-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.faecher-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faecher-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.faecher-item.haltung-item {
+    border-top: 4px solid #6B8E23;
+}
+
+.faecher-item.kompetenz-item {
+    border-top: 4px solid #FFD166;
+}
+
+.faecher-item.reflexion-item {
+    border-top: 4px solid #E8B4B8;
+}
+
+/* Fächer Header */
+.faecher-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.faecher-header .item-emoji {
+    font-size: 2.5rem;
+}
+
+.faecher-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.faecher-header .item-price {
+    margin: 0.25rem 0 0 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Quantity Control */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #6B8E23;
+    background: white;
+    color: #6B8E23;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.qty-btn:hover {
+    background: #6B8E23;
+    color: white;
+}
+
+.qty-btn:active {
+    transform: scale(0.95);
+}
+
+.qty-input {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+/* Item Total */
+.item-total {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #6B8E23;
+    margin-top: 1rem;
+}
+
+/* Price Summary */
+.price-summary {
+    background: #f5f7fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.summary-row.total-row {
+    border-top: 2px solid #6B8E23;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    font-size: 1.3rem;
+}
+
+.price-note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .faecher-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .faecher-item {
+        padding: 1.25rem;
+    }
+    
+    .quantity-control {
+        gap: 0.75rem;
+    }
+    
+    .qty-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .qty-input {
+        width: 70px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+}
