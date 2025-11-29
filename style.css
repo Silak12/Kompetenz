@@ -71,11 +71,32 @@ body {
     align-items: center;
 }
 
+/* Logo Styling */
 .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--chalk-white);
     font-family: var(--font-handwriting);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover {
+    opacity: 0.9;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
 }
 
 .nav-menu {
