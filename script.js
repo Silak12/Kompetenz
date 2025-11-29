@@ -4,7 +4,7 @@
 
 const faecherData = {
     haltung: {
-        emoji: '🌿',
+        emoji: '',
         title: 'Haltungsfächer',
         tagline: 'Lass deine Haltung tanzen.',
         description: `
@@ -18,7 +18,7 @@ const faecherData = {
         images: generateImagePaths('Haltung', 10) // Generiert Haltung_1.jpg bis Haltung_10.jpg
     },
     reflexion: {
-        emoji: '🌸',
+        emoji: '',
         title: 'Reflexionsfächer',
         tagline: 'Dein Wegbegleiter im Referendariat.',
         description: `
@@ -36,7 +36,7 @@ const faecherData = {
         images: generateImagePaths('Reflexion', 10)
     },
     kompetenz: {
-        emoji: '🌻',
+        emoji: '',
         title: 'Kompetenzfächer',
         tagline: 'Der Erfolg liegt in deinen Händen.',
         description: `
