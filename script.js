@@ -318,7 +318,7 @@ contactForm?.addEventListener('submit', (e) => {
         const faecherName = faecher === 'haltung' ? 'Haltungsfächer' : 
                            faecher === 'reflexion' ? 'Reflexionsfächer' : 
                            'Kompetenzfächer';
-        body += `- ${faecherName} (15,00 €)%0D%0A`;
+        body += `- ${faecherName} (10,00 €)%0D%0A`;
     });
     
     body += `%0D%0A`;
@@ -416,4 +416,4 @@ window.addEventListener('load', () => {
     });
 });
 
-console.log('🪶 Drei Fächer Website geladen!');
+console.log('Drei Fächer Website geladen!');
