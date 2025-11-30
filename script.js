@@ -23,7 +23,7 @@ const faecherData = {
         tagline: 'Der Erfolg liegt in deinen Händen.',
         description: `
             <p>Der <strong>KOMPETENZFÄCHER</strong> ist dein Werkzeug für bewusste Entwicklung.</p>
-            <p>Jede Karte ist ein kleiner Kompass. Sie lenkt den Blick auf das, was schon da ist – und auf das, was noch wachsen darf.</p>
+            <p>Jede Karte ist ein kleiner Kompass. Sie lenkt den Blick auf das, was schon da ist und auf das, was noch wachsen darf.</p>
             <p>So entsteht Entwicklung: bewusst, leicht, echt.</p>
             <p>Die Karten helfen dir dabei:</p>
             <ul style="margin-left: 1.5rem; line-height: 2;">
