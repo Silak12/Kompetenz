@@ -35,6 +35,20 @@ const faecherData = {
         `,
         images: generateImagePaths('Kompetenz', 6)
     },
+    begleitung: {
+        emoji: '',
+        title: 'Begleitungsfächer',
+        tagline: 'Sicher begleiten im Ausbildungsalltag.',
+        description: `
+            <p>Der <strong>BEGLEITUNGSFÄCHER</strong> ist ein Impulsgeber für deine Rolle als Ausbildungslehrkraft.</p>
+            <p>Er führt dich durch vier zentrale Dimensionen der Begleitung: <strong>Ankommen, Gesehen werden, Wachsen</strong> und <strong>Werden</strong>.</p>
+            <p>Jede Karte unterstützt dich dabei, Orientierung zu geben, Potenziale wahrzunehmen, Entwicklung anzustoßen und professionelle Reifung achtsam zu begleiten.</p>
+            <p>So entsteht Schritt für Schritt ein Raum, in dem aus ersten Erfahrungen Sicherheit wächst – und aus Unsicherheit Professionalität wird.</p>
+            <p style="font-style: italic; margin-top: 1.5rem;">Du begleitest nicht nur durch das Referendariat, sondern durch einen Weg des Werdens.</p>
+            <p style="font-family: 'Caveat', cursive; font-size: 1.4rem; margin-top: 1.5rem; color: var(--chalkboard-green);">"Wer begleitet, gestaltet Räume, in denen andere wachsen können."</p>
+        `,
+        images: generateImagePaths('Begleitung', 6)
+    },
     reflexion: {
         emoji: '',
         title: 'Reflexionsfächer',
@@ -71,6 +85,7 @@ function generateImagePaths(prefix, count) {
 const PREISE = {
     haltung: 10.00,
     kompetenz: 10.00,
+    begleitung: 10.00,
     reflexion: 10.00
 };
 
@@ -386,8 +401,9 @@ if (contactForm) {
         // Validierung: Mindestens ein Fächer muss ausgewählt sein
         const qtyHaltung = parseInt(document.getElementById('qty-haltung').value) || 0;
         const qtyKompetenz = parseInt(document.getElementById('qty-kompetenz').value) || 0;
+        const qtyBegleitung = parseInt(document.getElementById('qty-begleitung').value) || 0;
         const qtyReflexion = parseInt(document.getElementById('qty-reflexion').value) || 0;
-        const totalQty = qtyHaltung + qtyKompetenz + qtyReflexion;
+        const totalQty = qtyHaltung + qtyKompetenz + qtyBegleitung + qtyReflexion;
         
         if (totalQty === 0) {
             showMessage('Bitte wähle mindestens einen Fächer aus.', 'error');
@@ -414,6 +430,7 @@ if (contactForm) {
                 let orderSummary = '<ul style="list-style: none; padding: 0; margin: 1rem 0;">';
                 if (qtyHaltung > 0) orderSummary += `<li>🌿 ${qtyHaltung}x Haltungsfächer</li>`;
                 if (qtyKompetenz > 0) orderSummary += `<li>🌻 ${qtyKompetenz}x Kompetenzfächer</li>`;
+                if (qtyBegleitung > 0) orderSummary += `<li>🌱 ${qtyBegleitung}x Begleitungsfächer</li>`;
                 if (qtyReflexion > 0) orderSummary += `<li>🌸 ${qtyReflexion}x Reflexionsfächer</li>`;
                 orderSummary += '</ul>';
                 
