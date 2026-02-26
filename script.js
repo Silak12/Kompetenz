@@ -43,7 +43,7 @@ const faecherData = {
             <p>Der <strong>BEGLEITUNGSFÄCHER</strong> ist ein Impulsgeber für deine Rolle als Ausbildungslehrkraft.</p>
             <p>Er führt dich durch vier zentrale Dimensionen der Begleitung: <strong>Ankommen, Gesehen werden, Wachsen</strong> und <strong>Werden</strong>.</p>
             <p>Jede Karte unterstützt dich dabei, Orientierung zu geben, Potenziale wahrzunehmen, Entwicklung anzustoßen und professionelle Reifung achtsam zu begleiten.</p>
-            <p>So entsteht Schritt für Schritt ein Raum, in dem aus ersten Erfahrungen Sicherheit wächst – und aus Unsicherheit Professionalität wird.</p>
+            <p>So entsteht Schritt für Schritt ein Raum, in dem aus ersten Erfahrungen Sicherheit wächst und aus Unsicherheit Professionalität wird.</p>
             <p style="font-style: italic; margin-top: 1.5rem;">Du begleitest nicht nur durch das Referendariat, sondern durch einen Weg des Werdens.</p>
             <p style="font-family: 'Caveat', cursive; font-size: 1.4rem; margin-top: 1.5rem; color: var(--chalkboard-green);">"Wer begleitet, gestaltet Räume, in denen andere wachsen können."</p>
         `,
@@ -581,4 +581,4 @@ window.addEventListener('load', () => {
     });
 });
 
-console.log('Drei Fächer Website geladen!');
+console.log('Vier Fächer Website geladen!');
