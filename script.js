@@ -83,11 +83,18 @@ function generateImagePaths(prefix, count) {
 // ===========================
 
 const PREISE = {
-    haltung: 10.00,
-    kompetenz: 10.00,
-    begleitung: 10.00,
+    haltung: 8.00,
+    kompetenz: 8.00,
+    begleitung: 8.00,
     reflexion: 10.00
 };
+
+function calculateShipping(totalQty) {
+    if (totalQty === 0) return 0;
+    if (totalQty <= 2) return 3.99;
+    if (totalQty <= 5) return 4.99;
+    return 5.99;
+}
 
 function formatPrice(price) {
     return price.toFixed(2).replace('.', ',') + ' €';
@@ -109,17 +116,29 @@ function calculatePrices() {
         }
     });
     
+    // Versandkosten berechnen
+    const totalQty = Object.keys(PREISE).reduce((sum, type) => {
+        const input = document.getElementById(`qty-${type}`);
+        return sum + (parseInt(input?.value) || 0);
+    }, 0);
+    const shipping = calculateShipping(totalQty);
+    const total = subtotal + shipping;
+
     // Aktualisiere Gesamtsumme
     const subtotalElement = document.querySelector('.subtotal');
+    const shippingElement = document.querySelector('.shipping-cost');
     const totalElement = document.querySelector('.total-price strong');
     const totalHiddenInput = document.getElementById('total-price-hidden');
-    
+    const shippingHiddenInput = document.getElementById('shipping-price-hidden');
+
     if (subtotalElement) subtotalElement.textContent = formatPrice(subtotal);
-    if (totalElement) totalElement.textContent = formatPrice(subtotal);
-    if (totalHiddenInput) totalHiddenInput.value = formatPrice(subtotal);
-    
+    if (shippingElement) shippingElement.textContent = totalQty === 0 ? '–' : formatPrice(shipping);
+    if (totalElement) totalElement.textContent = formatPrice(total);
+    if (totalHiddenInput) totalHiddenInput.value = formatPrice(total);
+    if (shippingHiddenInput) shippingHiddenInput.value = totalQty === 0 ? '–' : formatPrice(shipping);
+
     // Button-Text aktualisieren
-    updateSubmitButton(subtotal);
+    updateSubmitButton(total);
 }
 
 function updateSubmitButton(total) {

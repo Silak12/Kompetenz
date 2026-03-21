@@ -294,7 +294,7 @@
                                     <span class="item-emoji"></span>
                                     <div>
                                         <h4>Reflexionsfächer</h4>
-                                        <p class="item-price">8 € / Stück</p>
+                                        <p class="item-price">10 € / Stück</p>
                                     </div>
                                 </div>
                                 <div class="quantity-control">
@@ -311,16 +311,21 @@
                                 <span>Zwischensumme:</span>
                                 <span class="subtotal">0,00 €</span>
                             </div>
+                            <div class="summary-row">
+                                <span>Versand:</span>
+                                <span class="shipping-cost">–</span>
+                            </div>
                             <div class="summary-row total-row">
-                                <span><strong>Gesamt:</strong></span>
+                                <span><strong>Gesamt (inkl. Versand):</strong></span>
                                 <span class="total-price"><strong>0,00 €</strong></span>
                             </div>
-                            <p class="price-note">*Unverbindliche Preisangabe. Versandkosten werden per E-Mail besprochen.</p>
+                            <p class="price-note">*Versand: 3,99 € (1–2 Stück) · 4,99 € (3–5 Stück) · 5,99 € (ab 6 Stück)</p>
                         </div>
                     </div>
                     
-                    <!-- Verstecktes Feld für Gesamtpreis -->
-                    <input type="hidden" id="total-price-hidden" name="Gesamtpreis" value="0,00 €">
+                    <!-- Versteckte Felder für Preise -->
+                    <input type="hidden" id="total-price-hidden" name="Gesamtpreis_inkl_Versand" value="0,00 €">
+                    <input type="hidden" id="shipping-price-hidden" name="Versandkosten" value="–">
                     
                     <div class="form-group">
                         <label for="message">Deine Nachricht (optional)</label>
