@@ -18,6 +18,7 @@
     --haltung-color: #8b9d6f;
     --reflexion-color: #d4a5a5;
     --kompetenz-color: #e8b86d;
+    --begleitung-color: #7fa8b8;
     
     /* Neutrale Farben */
     --cream: #f5f1e8;
@@ -151,6 +152,9 @@ body {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .hamburger span {
@@ -279,6 +283,10 @@ body {
     background: var(--kompetenz-color);
 }
 
+.faecher-card.begleitung::before {
+    background: var(--begleitung-color);
+}
+
 .faecher-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -339,6 +347,11 @@ body {
     color: var(--kompetenz-color);
 }
 
+.begleitung .fan-card {
+    border-color: var(--begleitung-color);
+    color: var(--begleitung-color);
+}
+
 /* Fächer Animation - Geschlossen */
 .fan-card.card-1 { transform: translateX(-50%) rotate(0deg); z-index: 7; }
 .fan-card.card-2 { transform: translateX(-50%) rotate(0deg); z-index: 6; }
@@ -349,6 +362,7 @@ body {
 .fan-card.card-7 { transform: translateX(-50%) rotate(0deg); z-index: 1; }
 .fan-card.card-8 { transform: translateX(-50%) rotate(0deg); z-index: 1; }
 .fan-card.card-9 { transform: translateX(-50%) rotate(0deg); z-index: 1; }
+.fan-card.card-10 { transform: translateX(-50%) rotate(0deg); z-index: 1; }
 
 /* Fächer Animation - Geöffnet beim Hover */
 .faecher-card:hover .fan-card.card-1 { transform: translateX(-50%) rotate(-30deg); }
@@ -360,6 +374,7 @@ body {
 .faecher-card:hover .fan-card.card-7 { transform: translateX(-50%) rotate(30deg); }
 .faecher-card:hover .fan-card.card-8 { transform: translateX(-50%) rotate(40deg); }
 .faecher-card:hover .fan-card.card-9 { transform: translateX(-50%) rotate(45deg); }
+.faecher-card:hover .fan-card.card-10 { transform: translateX(-50%) rotate(52deg); }
 
 .faecher-info {
     position: relative;
@@ -1374,6 +1389,10 @@ body {
     border-top: 4px solid #E8B4B8;
 }
 
+.faecher-item.begleitung-item {
+    border-top: 4px solid var(--begleitung-color);
+}
+
 /* Fächer Header */
 .faecher-header {
     display: flex;
@@ -1504,5 +1523,105 @@ body {
         width: 70px;
         height: 45px;
         font-size: 1.3rem;
+    }
+}
+/* ===================================
+   LIEFERADRESSE & EINWILLIGUNG
+   =================================== */
+
+.address-fieldset {
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.address-fieldset legend {
+    padding: 0 0.6rem;
+    font-weight: 700;
+    color: var(--chalkboard-green);
+}
+
+.address-fieldset .selection-hint {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+}
+
+.form-row-plz {
+    grid-template-columns: 1fr 2fr;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    background: white;
+    color: var(--text-dark);
+    transition: border-color 0.3s ease;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--chalkboard-green);
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group input:user-invalid {
+    border-color: #d9534f;
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.consent-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    accent-color: var(--chalkboard-green);
+    cursor: pointer;
+}
+
+.consent-label a {
+    color: var(--chalkboard-green);
+    font-weight: 600;
+}
+
+.btn-submit:disabled {
+    cursor: not-allowed;
+}
+
+:focus-visible {
+    outline: 3px solid var(--kompetenz-color);
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .form-row-plz {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

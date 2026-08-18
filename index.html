@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vier Fächer – Deine Begleiter im Referendariat</title>
-    
+    <title>Vier Fächer – Kartensets für Referendariat und Ausbildung</title>
+    <meta name="description" content="Haltungs-, Kompetenz-, Begleitungs- und Reflexionsfächer: vier Kartensets mit Impulsen für Referendariat, Ausbildung und pädagogische Professionalisierung. 10 € pro Fächer.">
+    <meta name="theme-color" content="#2f4538">
+    <link rel="canonical" href="https://xn--kompetenzfcher-fib.de/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Vier Fächer – Deine Begleiter im Referendariat">
+    <meta property="og:description" content="Vier Kartensets mit Impulsen zum Nachdenken, Lächeln und Wachsen – für Referendariat und Ausbildung.">
+    <meta property="og:image" content="https://xn--kompetenzfcher-fib.de/assets/logo.jpg">
+    <meta property="og:locale" content="de_DE">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="assets/favicon.jpg">
-    
+
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,15 +32,15 @@
                 <img src="assets/logo.jpg" alt="Vier Fächer Logo" class="logo-img">
                 <span class="logo-text">Vier Fächer</span>
             </a>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link">Die Fächer</a></li>
                 <li><a href="#kontakt" class="nav-link nav-link-cta">Kontakt</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -71,14 +81,14 @@
                         <div class="faecher-emoji"></div>
                         <h2>Haltungsfächer</h2>
                         <p class="faecher-tagline">Lass deine Haltung tanzen.</p>
-                        <button class="btn-explore">Entdecken</button>
+                        <button class="btn-explore" aria-label="Haltungsfächer entdecken">Entdecken</button>
                     </div>
                 </div>
 
 
                 <!-- Kompetenzfächer -->
                 <div class="faecher-card kompetenz" data-faecher="kompetenz">
-                    <div class="faecher-bg" style="background-image: url('assets/kompetenz_hero.jpg');"></div>
+                    <div class="faecher-bg" style="background-image: url('assets/Kompetenz_hero.jpg');"></div>
                     <div class="faecher-preview">
                         <div class="fan-shape">
                             <div class="fan-card card-1">K</div>
@@ -96,7 +106,7 @@
                         <div class="faecher-emoji"></div>
                         <h2>Kompetenzfächer</h2>
                         <p class="faecher-tagline">Der Erfolg liegt in deinen Händen.</p>
-                        <button class="btn-explore">Entdecken</button>
+                        <button class="btn-explore" aria-label="Kompetenzfächer entdecken">Entdecken</button>
                     </div>
                 </div>
                 
@@ -121,13 +131,13 @@
                         <div class="faecher-emoji"></div>
                         <h2>Begleitungsfächer</h2>
                         <p class="faecher-tagline">Sicher begleiten im Ausbildungsalltag.</p>
-                        <button class="btn-explore">Entdecken</button>
+                        <button class="btn-explore" aria-label="Begleitungsfächer entdecken">Entdecken</button>
                     </div>
                 </div>
 
                 <!-- Reflexionsfächer -->
                 <div class="faecher-card reflexion" data-faecher="reflexion">
-                    <div class="faecher-bg" style="background-image: url('assets/reflexion_hero.jpg');"></div>
+                    <div class="faecher-bg" style="background-image: url('assets/Reflexion_hero.jpg');"></div>
                     <div class="faecher-preview">
                         <div class="fan-shape">
                             <div class="fan-card card-1">R</div>
@@ -145,7 +155,7 @@
                         <div class="faecher-emoji"></div>
                         <h2>Reflexionsfächer</h2>
                         <p class="faecher-tagline">Dein Wegbegleiter im Referendariat.</p>
-                        <button class="btn-explore">Entdecken</button>
+                        <button class="btn-explore" aria-label="Reflexionsfächer entdecken">Entdecken</button>
                     </div>
                 </div>
 
@@ -223,15 +233,46 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" autocomplete="name" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="email">E-Mail *</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" autocomplete="email" required>
                         </div>
                     </div>
-                    
+
+                    <fieldset class="address-fieldset">
+                        <legend>Lieferadresse</legend>
+                        <p class="selection-hint">Damit ich dir direkt sagen kann, was der Versand kostet und wann es losgeht.</p>
+
+                        <div class="form-group">
+                            <label for="street">Straße und Hausnummer *</label>
+                            <input type="text" id="street" name="Strasse_Hausnummer" autocomplete="street-address" required>
+                        </div>
+
+                        <div class="form-row form-row-plz">
+                            <div class="form-group">
+                                <label for="zip">PLZ *</label>
+                                <input type="text" id="zip" name="PLZ" inputmode="numeric" pattern="[0-9]{4,5}" maxlength="5" autocomplete="postal-code" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city">Ort *</label>
+                                <input type="text" id="city" name="Ort" autocomplete="address-level2" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Land *</label>
+                            <select id="country" name="Land" autocomplete="country-name" required>
+                                <option value="Deutschland" selected>Deutschland</option>
+                                <option value="Österreich">Österreich</option>
+                                <option value="Schweiz">Schweiz</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
                     <div class="faecher-selection">
                         <h3>Welche Fächer interessieren dich?</h3>
                         <p class="selection-hint">Wähle die Anzahl für jeden Fächer (0 = nicht bestellen)</p>
@@ -243,7 +284,7 @@
                                     <span class="item-emoji"></span>
                                     <div>
                                         <h4>Haltungsfächer</h4>
-                                        <p class="item-price">8 € / Stück</p>
+                                        <p class="item-price">10 € / Stück</p>
                                     </div>
                                 </div>
                                 <div class="quantity-control">
@@ -260,7 +301,7 @@
                                     <span class="item-emoji"></span>
                                     <div>
                                         <h4>Kompetenzfächer</h4>
-                                        <p class="item-price">8 € / Stück</p>
+                                        <p class="item-price">10 € / Stück</p>
                                     </div>
                                 </div>
                                 <div class="quantity-control">
@@ -277,7 +318,7 @@
                                     <span class="item-emoji"></span>
                                     <div>
                                         <h4>Begleitungsfächer</h4>
-                                        <p class="item-price">8 € / Stück</p>
+                                        <p class="item-price">10 € / Stück</p>
                                     </div>
                                 </div>
                                 <div class="quantity-control">
@@ -332,12 +373,17 @@
                         <textarea id="message" name="message" rows="4" placeholder="Hast du noch Fragen oder besondere Wünsche?"></textarea>
                     </div>
                     
+                    <div class="form-group consent-group">
+                        <label class="consent-label">
+                            <input type="checkbox" id="privacy" name="Datenschutz_akzeptiert" value="Ja" required>
+                            <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden. *</span>
+                        </label>
+                    </div>
+
                     <button type="submit" class="btn-primary btn-submit" id="submit-btn">Unverbindliche Anfrage senden</button>
                     <p class="form-note">Nach dem Absenden erhältst du eine Bestätigung per E-Mail mit allen Details.</p>
                 </form>
             </div>
-        </div>
-    </section>
         </div>
     </section>
 
@@ -356,7 +402,7 @@
                 <span>|</span>
                 <a href="agb.html">AGB</a>
             </div>
-            <p class="footer-copy">© 2025 Vier Fächer – Mit Haltung, Humor und Herz 🪶</p>
+            <p class="footer-copy">© <span id="footer-year">2025</span> Vier Fächer – Mit Haltung, Humor und Herz 🪶</p>
         </div>
     </footer>
 

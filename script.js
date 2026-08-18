@@ -47,7 +47,7 @@ const faecherData = {
             <p style="font-style: italic; margin-top: 1.5rem;">Du begleitest nicht nur durch das Referendariat, sondern durch einen Weg des Werdens.</p>
             <p style="font-family: 'Caveat', cursive; font-size: 1.4rem; margin-top: 1.5rem; color: var(--chalkboard-green);">"Wer begleitet, gestaltet Räume, in denen andere wachsen können."</p>
         `,
-        images: generateImagePaths('Begleitung', 6)
+        images: generateImagePaths('Begleitung', 5)
     },
     reflexion: {
         emoji: '',
@@ -83,9 +83,9 @@ function generateImagePaths(prefix, count) {
 // ===========================
 
 const PREISE = {
-    haltung: 8.00,
-    kompetenz: 8.00,
-    begleitung: 8.00,
+    haltung: 10.00,
+    kompetenz: 10.00,
+    begleitung: 10.00,
     reflexion: 10.00
 };
 
@@ -206,17 +206,23 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
+function setMenuOpen(open) {
+    navMenu?.classList.toggle('active', open);
+    hamburger?.classList.toggle('active', open);
+    hamburger?.setAttribute('aria-expanded', String(open));
+    hamburger?.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+}
+
 hamburger?.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
+    setMenuOpen(!navMenu.classList.contains('active'));
 });
 
 navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger?.classList.remove('active');
-    });
+    link.addEventListener('click', () => setMenuOpen(false));
 });
+
+const footerYear = document.getElementById('footer-year');
+if (footerYear) footerYear.textContent = new Date().getFullYear();
 
 // ===========================
 // MODAL FUNKTIONALITÄT
@@ -229,6 +235,7 @@ const faecherCards = document.querySelectorAll('.faecher-card');
 
 let currentGalleryIndex = 0;
 let currentFaecherImages = [];
+let currentFaecherType = null;
 
 // Fächer Card Click Handler
 faecherCards.forEach(card => {
@@ -242,7 +249,9 @@ faecherCards.forEach(card => {
 function openModal(faecherType) {
     const data = faecherData[faecherType];
     if (!data) return;
-    
+
+    currentFaecherType = faecherType;
+
     // Modal Inhalt füllen
     modal.querySelector('.modal-emoji').textContent = data.emoji;
     modal.querySelector('.modal-title').textContent = data.title;
@@ -313,7 +322,7 @@ function buildGallery(images) {
     images.forEach((imagePath, index) => {
         const slide = document.createElement('div');
         slide.className = 'gallery-slide';
-        slide.innerHTML = `<img src="${imagePath}" alt="Fächer Karte ${index + 1}">`;
+        slide.innerHTML = `<img src="${imagePath}" alt="Fächer Karte ${index + 1}" loading="lazy">`;
         galleryTrack.appendChild(slide);
         
         const dot = document.createElement('div');
@@ -400,6 +409,12 @@ function handleSwipe() {
 // ===========================
 
 modal?.querySelector('.btn-order')?.addEventListener('click', () => {
+    const qtyInput = document.getElementById(`qty-${currentFaecherType}`);
+    if (qtyInput && (parseInt(qtyInput.value) || 0) === 0) {
+        qtyInput.value = 1;
+        calculatePrices();
+    }
+
     closeModal();
     document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' });
 });
@@ -415,8 +430,7 @@ if (contactForm) {
         e.preventDefault();
         
         const submitBtn = document.getElementById('submit-btn');
-        const originalBtnText = submitBtn.textContent;
-        
+
         // Validierung: Mindestens ein Fächer muss ausgewählt sein
         const qtyHaltung = parseInt(document.getElementById('qty-haltung').value) || 0;
         const qtyKompetenz = parseInt(document.getElementById('qty-kompetenz').value) || 0;
@@ -474,8 +488,8 @@ if (contactForm) {
             console.error('Formular-Fehler:', error);
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = originalBtnText;
             submitBtn.style.opacity = '1';
+            calculatePrices();
         }
     });
 }
